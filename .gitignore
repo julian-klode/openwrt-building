@@ -1,0 +1,4 @@
+/lede-imagebuilder*
+/OpenWrt-ImageBuilder*
+/files/etc/config/privoxy
+/files/etc/init.d/privoxy

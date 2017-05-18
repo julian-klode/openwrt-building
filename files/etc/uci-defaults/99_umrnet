@@ -1,0 +1,11 @@
+#!/bin/sh
+#
+# Preparation script for setup
+
+# Enable a wireless access point
+uci set wireless.radio0.disabled=''
+uci set wireless.radio0.country='DE'
+
+uci set wireless.@wifi-iface[0].ssid='MNet-Setup'
+uci set wireless.@wifi-iface[0].encryption='psk2'
+uci set wireless.@wifi-iface[0].key='kveYU0Ab'
