@@ -62,6 +62,7 @@ while [ "$WIFI_PSK" = "unset" ] || [ "$WIFI_PSK" != "$WIFI_PSK2" ]; do
     [ "$WIFI_PSK" == "$WIFI_PSK2" ] || echo "Passwords do not match, try again."    
 done
 
+echo "Setting up WiFi. Please wait..."
 [ "$WIFI_NAME" ] || WIFI_NAME="$DEFAULT_WIFI_NAME"
 [ "$WIFI_PSK" ] || WIFI_PSK="$DEFAULT_WIFI_PSK"
 
@@ -71,5 +72,7 @@ uci set wireless.@wifi-iface[0].encryption='psk2'
 uci set wireless.radio0.country='DE'
 uci set wireless.@wifi-iface[0].key="$WIFI_PSK"
 uci set wireless.radio0.disabled=''
+
+uci commit
 
 /etc/init.d/network restart
