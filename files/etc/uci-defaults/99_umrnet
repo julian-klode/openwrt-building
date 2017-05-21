@@ -14,9 +14,9 @@ fi
 uci set wireless.radio0.disabled=''
 uci set wireless.radio0.country='DE'
 
-uci set wireless.@wifi-iface[0].ssid='MNet-Setup'
+uci set wireless.@wifi-iface[0].ssid='MNet-setup'
 uci set wireless.@wifi-iface[0].encryption='psk2'
-uci set wireless.@wifi-iface[0].key='kveYU0Ab'
+uci set wireless.@wifi-iface[0].key='setup'
 
 # Set a nice hostname
 uci set system.@system[0].hostname='UniGateway'
