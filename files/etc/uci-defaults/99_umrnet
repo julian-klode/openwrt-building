@@ -20,6 +20,3 @@ uci set wireless.@wifi-iface[0].key='kveYU0Ab'
 
 # Set a nice hostname
 uci set system.@system[0].hostname='UniGateway'
-
-# Automatically enable the umrnet init script
-/etc/init.d/umrnet enable
