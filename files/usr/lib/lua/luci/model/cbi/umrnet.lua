@@ -14,7 +14,7 @@ local s_eth1 = umrnet:section(NamedSection, "eth1", "umrnet", translate("Student
 local network = Map("network", translate("Network settings given to HRZ"))
 
 local s_netdetails = network:section(NamedSection, "wan", "interface", translate("Network details"))
-    local o_mac = s_netdetails:option(Value, "macaddr", translate("MAC Address"), translate("This is the address of the network adapter you gave to the HRZ (we'll pretend we are the same device)"))
+    local o_mac = s_netdetails:option(Value, "macaddr", translate("MAC Address"), translate("The ID of the network adapter previously used / registered with HRZ. Has a form like AB:AB:AB:AB:AB:AB or AB-AB-AB-AB-AB-AB"))
 
     o_mac.datatype = "macaddr"
 return umrnet, network 
