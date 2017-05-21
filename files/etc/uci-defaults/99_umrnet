@@ -2,6 +2,14 @@
 #
 # Preparation script for setup
 
+# Migrate eth1 port to WAN
+if [ "$(uci get network.lan.ifname)" = "eth1" ]; then
+    uci set network.lan.ifname=''
+    uci set network.wan=interface
+    uci set network.wan.proto='dhcp'
+    uci set network.wan.ifname='eth1'
+fi
+
 # Enable a wireless access point
 uci set wireless.radio0.disabled=''
 uci set wireless.radio0.country='DE'

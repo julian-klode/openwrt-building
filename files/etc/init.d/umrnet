@@ -4,9 +4,46 @@ START=15
 STOP=95
 USE_PROCD=1
 
+service_triggers()
+{
+        procd_add_reload_trigger "umrnet"
+}
+
 start_service() {
+	USER="$(uci get umrnet.eth1.user)"
+	PASS="$(uci get umrnet.eth1.password)"
+
+cat > /tmp/wpa_supplicant@eth1.conf << EOF
+# wpa_supplicant.conf                                                                                   
+#                              
+# wpa_supplicant configuration file for IEEE 802.1X authentication
+# in university marburg wired network 
+#                     
+                                                
+ctrl_interface=/var/run/wpa_supplicant          
+ctrl_interface_group=0
+                             
+# IEEE 802.1X (wired) works with EAPOL version 2                                                        
+eapol_version=2                
+                                             
+# important for wired network                
+ap_scan=0                 
+                          
+# university network connection configuration
+network={                
+        key_mgmt=IEEE8021X                           
+        eap=TTLS                                          
+        phase1=""                                         
+        phase2="auth=PAP"                       
+        ca_cert="/etc/Deutsche_Telekom_Root_CA_2.pem"
+        anonymous_identity="$USER"
+        identity="$USER"
+        password="$PASS"
+}                                                                                                       
+EOF
+	logger starting	
 	procd_open_instance
-	procd_set_param command /usr/sbin/wpa_supplicant -d -D wired -i eth1 -c /etc/wpa_supplicant.conf
+	procd_set_param command /usr/sbin/wpa_supplicant -d -D wired -i eth1 -c /tmp/wpa_supplicant@eth1.conf
 	procd_set_param respawn
 	procd_close_instance
 }

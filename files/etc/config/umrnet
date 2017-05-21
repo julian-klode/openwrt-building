@@ -1,0 +1,4 @@
+config umrnet 'eth1'
+	option password 'password'
+	option user 'user@students.uni-marburg.de'
+
