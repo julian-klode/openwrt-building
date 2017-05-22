@@ -13,13 +13,25 @@ fi
 # Enable a wireless access point
 uci set wireless.radio0.disabled=''
 uci set wireless.radio0.country='DE'
-uci set wireless.radio0.channel='auto'
 uci set wireless.radio0.txpower='4'
-
 
 uci set wireless.@wifi-iface[0].ssid='MNet-setup'
 uci set wireless.@wifi-iface[0].encryption='psk2'
 uci set wireless.@wifi-iface[0].key='MNet-setup'
+
+# Automatically pick one of the channels 1, 6, 11.
+random=0
+while [ "$random" -eq 0 ]; do
+        random=$(</dev/urandom tr -dc 0-9 | head -c1)
+done
+
+case "$random" in
+        1|2|3) channel=1;;
+        4|5|6) channel=6;;
+        7|8|9) channel=11;
+esac
+
+uci set wireless.radio0.channel="$channel"
 
 # Enable traffic shaping for low pings
 if [ -e "/etc/config/sqm" ]; then
