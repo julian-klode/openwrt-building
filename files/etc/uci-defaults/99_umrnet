@@ -13,6 +13,9 @@ fi
 # Enable a wireless access point
 uci set wireless.radio0.disabled=''
 uci set wireless.radio0.country='DE'
+uci set wireless.radio0.channel='auto'
+uci set wireless.radio0.txpower='4'
+
 
 uci set wireless.@wifi-iface[0].ssid='MNet-setup'
 uci set wireless.@wifi-iface[0].encryption='psk2'
