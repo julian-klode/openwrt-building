@@ -3,7 +3,7 @@
 # Preparation script for setup
 
 # Migrate eth1 port to WAN
-if [ "$(uci get network.lan.ifname)" = "eth1" ]; then
+if [ "$(uci get network.lan.ifname || true)" = "eth1" ]; then
     uci set network.lan.ifname=''
     uci set network.wan=interface
     uci set network.wan.proto='dhcp'
