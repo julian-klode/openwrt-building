@@ -18,5 +18,12 @@ uci set wireless.@wifi-iface[0].ssid='MNet-setup'
 uci set wireless.@wifi-iface[0].encryption='psk2'
 uci set wireless.@wifi-iface[0].key='MNet-setup'
 
+# Enable traffic shaping for low pings
+if [ -e "/etc/config/sqm" ]; then
+    uci set sqm.eth1.enabled='1'
+    uci set sqm.eth1.download='8000'
+    uci set sqm.eth1.upload='8000'
+fi
+
 # Set a nice hostname
 uci set system.@system[0].hostname='UniGateway'
